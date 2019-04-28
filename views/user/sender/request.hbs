@@ -1,0 +1,54 @@
+<!-- Title -->
+<div class="hk-pg-header align-items-top">
+    <div>
+        <h4 class="hk-pg-title font-weight-600 mb-10">Request</h4>
+    </div>
+</div>
+<!-- /Title -->
+<div class="row">
+    <div class="col-lg">
+        {{#if hasErrors}}
+        <div class="alert alert-danger">
+            {{#each messages}}
+            <p>{{this}}</p>
+            {{/each}}
+        </div>
+        {{/if}}
+        {{#if hasSuccess}}
+        <div class="alert alert-success">
+            {{#each success}}
+            <p>{{this}}</p>
+            {{/each}}
+        </div>
+        {{/if}}
+        <div class="card">
+            <div class="card-header card-header-action">
+                <h3>Make a request</h3>
+            </div>
+            <div class="card-body">
+                <form action="/sender/request" method="post">
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="location">Pick Up Location</label>
+                            <input type="text" name="location" class="form-control"
+                                placeholder="Input a place to pick up your item">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <input type="text" name="destination" class="form-control"
+                                placeholder="Input a destion for your item">
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-group">
+                            <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+                            <button type="submit" class="form-control btn btn-outline-success">Make Request</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
