@@ -6,12 +6,14 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
-var hbs = require('handlebars');
+var hbs = require('hbs');
 var hbsutils = require('hbs-utils');
-// Declaring our routes
-var sender = require('./routes/sender');
+var con = require('./config/config');
+var swal = require('sweetalert')
+    // Declaring our routes
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var users = require('./routes/user');
+var request = require('./routes/request');
 
 var app = express();
 const blocks = {};
@@ -27,8 +29,7 @@ hbs.registerPartials(`${__dirname}/views/partials`);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'handlebars');
-
+app.set('view engine', 'hbs');
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -44,19 +45,22 @@ app.use(session({
     saveUninitialized: false,
     cookie: { expires: 180 * 60 * 1000 }
 }));
-
-// This middleware will check if user's cookie is still saved in
-//  browser and user is not set, then automatically log the user out.
-// This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
+// Flash Message
+app.use(flash());
+// app.use(swal)
+    // This middleware will check if user's cookie is still saved in
+    //  browser and user is not set, then automatically log the user out.
+    // This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
 app.use((req, res, next) => {
     res.locals.session = req.session;
+    res.locals.login = req.session.user
     next();
 });
 
 // Making our routes usable
+app.use('/request', request);
+app.use('/user', users);
 app.use('/', routes);
-app.use('/sender', sender);
-app.use('/users', users);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

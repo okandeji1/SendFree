@@ -1,0 +1,124 @@
+<!-- Breadcrumb -->
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+	<ol class="breadcrumb breadcrumb-light bg-transparent">
+		<li class="breadcrumb-item"><a href="#">Pages</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Request</li>
+	</ol>
+</nav>
+<!-- /Breadcrumb -->
+
+<!-- Container -->
+<div class="container">
+	<!-- Title -->
+	<div class="hk-pg-header mb-10">
+		<div>
+			<h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon"><i
+							data-feather="activity"></i></span></span>Sender Details</h4>
+		</div>
+	</div>
+	<!-- /Title -->
+
+	<!-- Row -->
+	<div class="row">
+		<div class="col-xl-12">
+			<div class="card card-lg">
+				<h6 class="card-header">
+					Details
+				</h6>
+				{{#each requestDetails}}
+				<div class="card-body">
+					<div class="user-activity">
+						<div class="media">
+							<div class="media-img-wrap">
+								<div class="avatar avatar-sm">
+									<img src="dist/img/avatar2.jpg" alt="user" class="avatar-img rounded-circle">
+								</div>
+							</div>
+							<div class="media-body">
+								<div>
+									<span class="d-block mb-5"><span
+											class="font-weight-500 text-dark text-capitalize">{{this.user_id}}{{firstname}}{{lastname}}</span><span
+											class="pl-5">Sent you this request</span></span>
+									<span class="d-block font-13 mb-30">3 hours ago</span>
+								</div>
+								<div class="card d-inline-block w-sm-360p">
+									<div class="card-body">
+										<div class="d-flex flex-wrap">
+											<div class="w-65">
+												<h6 class="mb-5">Details</h6>
+												<p>{{this.user}}{{firstname}} sent you a message to deliver. the pickup
+													location is {{this.pickup_location}} and you are to deliver it to
+													{{this.destination}}.</p>
+												<p>Date sent: {{this.created}}</p>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer text-muted justify-content-between">
+										<button class="btn btn-md btn-gradient-danger btn-rounded" type="button"
+											onclick="acceptRequest(this.value)" value="{{id}}">Deline</button>
+										<button class="btn btn-md btn-gradient-success btn-rounded" type="button"
+											onclick="acceptRequest(this.value)" value="{{id}}">Accept</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+	<!-- /Row -->
+</div>
+<!-- /Container -->
+<script>
+
+	function acceptRequest(id) {
+
+		alert(id);
+
+		swal({
+			title: 'Are you sure you want to accept this request?',
+			text: "You won't be able to revert this!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, Accept it!',
+			cancelButtonText: 'No, cancel!',
+			reverseButtons: true
+
+		}).then(function (result) {
+			if (result.value) {
+
+				confirmRequest(id);
+
+				swal(
+					'Accepted!',
+					'Request accepted',
+					'success'
+				)
+					.then(function () {
+						location.reload();
+					});
+			} else if (result.dismiss === 'cancel') {
+				swal(
+					'Cancelled',
+					'Your imaginary file is safe :)',
+					'error'
+				)
+			}
+		});
+	};
+
+	function acceptRequest(id) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				// Typical action to be performed when the document is ready:
+			}
+		};
+		xhttp.open("POST", "http://127.0.0.1:4000/request/request-status", true);
+		xhttp.send(JSON.stringify(id));
+	}
+
+
+</script>

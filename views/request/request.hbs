@@ -1,3 +1,11 @@
+<!-- Breadcrumb -->
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#">Request</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Make Request</li>
+    </ol>
+</nav>
+<!-- /Breadcrumb -->
 <!-- Title -->
 <div class="hk-pg-header align-items-top">
     <div>
@@ -14,19 +22,15 @@
             {{/each}}
         </div>
         {{/if}}
-        {{#if hasSuccess}}
-        <div class="alert alert-success">
-            {{#each success}}
-            <p>{{this}}</p>
-            {{/each}}
-        </div>
+        {{#if success}}
+        <div class="alert alert-success"></div>
         {{/if}}
         <div class="card">
             <div class="card-header card-header-action">
                 <h3>Make a request</h3>
             </div>
             <div class="card-body">
-                <form action="/sender/request" method="post">
+                <form action="/request" method="post">
                     <div class="col-8">
                         <div class="form-group">
                             <label for="location">Pick Up Location</label>
@@ -44,7 +48,8 @@
                     <div class="card-footer">
                         <div class="form-group">
                             <input type="hidden" name="_csrf" value="{{_csrfToken}}">
-                            <button type="submit" class="form-control btn btn-outline-success">Make Request</button>
+                            <button type="submit" class="form-control btn btn-gradient-dark btn-rounded">Make
+                                Request</button>
                         </div>
                     </div>
                 </form>
