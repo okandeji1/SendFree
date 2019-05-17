@@ -10,13 +10,13 @@
                     class="feather-icon"><i data-feather="search"></i></span></a>
         </li>
         <li class="nav-item dropdown dropdown-authentication">
-            {{#if login}}
+            {{#each user}}
             <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <div class="media">
                     <div class="media-img-wrap">
                         <div class="avatar">
-                            <img src="" alt="" class="avatar-img rounded-circle">
+                            <img src="/uploads/users/{{photo}}" alt="" class="avatar-img rounded-circle">
                         </div>
                         <span class="badge badge-success badge-indicator"></span>
                     </div>
@@ -26,15 +26,16 @@
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-                <a class="dropdown-item" href="#"><i
-                        class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
+                <a class="dropdown-item" href="/user/profile"><i
+                        class="dropdown-icon zmdi zmdi-account text-warning"></i><span>Profile</span></a>
                 <a class="dropdown-item" href="#"><i
                         class="dropdown-icon zmdi zmdi-settings"></i><span>Settings</span></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/logout"><i class="dropdown-icon zmdi zmdi-power"></i><span>Log
+                <a class="dropdown-item" href="/logout"><i
+                        class="dropdown-icon zmdi zmdi-power  text-danger"></i><span>Log
                         out</span></a>
             </div>
-            {{/if}}
+            {{/each}}
         </li>
     </ul>
 </nav>

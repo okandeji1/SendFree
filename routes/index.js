@@ -51,8 +51,9 @@ router.get('/register', (req, res) => {
 router.post('/login', async(req, res) => {
     let email = req.body.email;
     let password = req.body.password;
+    var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm;
     // Validation Error
-    if (email === "" || typeof email === 'undefined') {
+    if (email === "" || typeof email === 'undefined' || !re.test(email)) {
         req.flash('error', 'Email is empty')
         res.redirect('/login');
         return
@@ -80,7 +81,7 @@ router.post('/login', async(req, res) => {
 
         // Compare incoming and existing password together to know if the password is valid or not
         if (!validPassword(password, pwd)) {
-            req.flash('error', 'Incorrect password')
+            req.flash('error', 'Incorrect username or password')
             res.redirect('/login')
         } else {
             req.session.user = loginUser;

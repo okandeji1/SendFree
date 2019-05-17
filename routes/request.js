@@ -9,7 +9,7 @@ const user = {}
     // Make request page
 router.get('/', isLoggedIn, (req, res) => {
     var messages = req.flash('error');
-    var success = req.flash('success')
+    var success = req.flash('success')[0]
     res.render('request/request', {
         layout: 'layouts/admin',
         _csrfToken: req.csrfToken(),
@@ -33,7 +33,7 @@ router.get('/all-request', isLoggedIn, async(req, res) => {
     res.render('request/list_request', { layout: 'layouts/admin', requests: reqChunks });
 });
 
-// Get Sender Details
+// Get Sender Details  by id
 router.get('/details/:id', isLoggedIn, async(req, res) => {
     let id = req.params.id
     let requestDetails = await user._getRequestDetails(id);
@@ -61,8 +61,9 @@ router.post('/', isLoggedIn, async(req, res) => {
         res.redirect('/request');
         return;
     }
+    // user ID ie session user
     let userId = req.session.user[0].id;
-    // DB query
+    // Request data
     let requestInfo = [location, destination, userId]
     let sendRequest = await user._makeRequest(requestInfo);
     if (sendRequest.error) {
@@ -76,14 +77,17 @@ router.post('/', isLoggedIn, async(req, res) => {
 
 })
 
-// Receiver response
-router.post('/request-status', isLoggedIn, async(req, res) => {
-    let requestId = req.body.id;
-    let userId = req.session.user[0].id;
+// Receiver response (accept / decline request)
+router.post('/review', isLoggedIn, async(req, res) => {
     console.log(req.body);
     return
+    let requestId = req.body.id;
+    let userId = req.session.user[0].id;
     let responseInfo = [userId, requestId, status]
 })
+
+module.exports = router;
+
 
 // Make request query
 user._makeRequest = (requestInfo) => {
@@ -130,6 +134,7 @@ user._getRequestDetails = (id) => {
     })
 }
 
+// 
 user._receverResponse = (responseInfo) => {
         return new Promise(resolved => {
             try {
@@ -151,5 +156,3 @@ function isLoggedIn(req, res, next) {
     req.session.oldUrl = req.url;
     res.redirect('/login');
 }
-
-module.exports = router;

@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors')
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -14,6 +15,7 @@ var swal = require('sweetalert')
 var routes = require('./routes/index');
 var users = require('./routes/user');
 var request = require('./routes/request');
+var admin = require('./routes/admin/admin_user');
 
 var app = express();
 const blocks = {};
@@ -33,9 +35,11 @@ app.set('view engine', 'hbs');
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// Enable cors for all platform
+app.use(cors())
 
 // initialize express-session to allow us track the logged-in user across sessions.
 app.use(session({
@@ -47,17 +51,17 @@ app.use(session({
 }));
 // Flash Message
 app.use(flash());
-// app.use(swal)
-    // This middleware will check if user's cookie is still saved in
-    //  browser and user is not set, then automatically log the user out.
-    // This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
+// This middleware will check if user's cookie is still saved in
+//  browser and user is not set, then automatically log the user out.
+// This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
 app.use((req, res, next) => {
     res.locals.session = req.session;
-    res.locals.login = req.session.user
+    res.locals.login = req.session.user;
     next();
 });
 
 // Making our routes usable
+app.use('/admin', admin);
 app.use('/request', request);
 app.use('/user', users);
 app.use('/', routes);

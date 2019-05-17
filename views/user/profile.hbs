@@ -1,0 +1,251 @@
+<!-- Container -->
+<div class="container-fluid">
+	<!-- Row -->
+	<div class="row">
+		{{#if hasErrors}}
+		<div class="alert alert-danger">
+			{{#each messages}}
+			<p>{{this}}</p>
+			{{/each}}
+		</div>
+		{{/if}}
+		{{#if success}}
+		<div class="alert alert-success">
+			{{success}}
+		</div>
+		{{/if}}
+		<div class="col-xl-12 pa-0">
+			<div class="profile-cover-wrap overlay-wrap">
+				<div class="profile-cover-img" style="background-image:url('dist/img/trans-bg.jpg')"></div>
+				<div class="bg-overlay bg-trans-dark-60"></div>
+				<div class="container profile-cover-content py-50">
+					<div class="hk-row">
+						{{#each user}}
+						<div class="col-lg-6">
+							<div class="media align-items-center">
+								<div class="media-img-wrap  d-flex">
+									<div class="avatar">
+										<img src="/uploads/users/{{photo}}" alt="user"
+											class="avatar-img rounded-circle">
+									</div>
+								</div>
+								<div class="media-body">
+									<div class="text-white text-capitalize display-6 mb-5 font-weight-400">{{firstname}}
+										{{lastname}}</div>
+									<div class="font-14 text-white"><span class="mr-5"><span
+												class="font-weight-500 pr-5">124</span><span
+												class="mr-5">Followers</span></span><span><span
+												class="font-weight-500 pr-5">45</span><span>Following</span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						{{/each}}
+						<div class="col-lg-6">
+							<div class="button-list">
+								<a href="#" class="btn btn-dark btn-wth-icon icon-wthot-bg btn-rounded"><span
+										class="btn-text">Message</span><span class="icon-label"><i
+											class="icon ion-md-mail"></i> </span></a>
+								<a href="#" class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
+										class="btn-icon-wrap"><i class="fa fa-facebook"></i></span></a>
+								<a href="#" class="btn btn-icon btn-icon-circle btn-sky btn-icon-style-2"><span
+										class="btn-icon-wrap"><i class="fa fa-twitter"></i></span></a>
+								<a href="#" class="btn btn-icon btn-icon-circle btn-purple btn-icon-style-2"><span
+										class="btn-icon-wrap"><i class="fa fa-instagram"></i></span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-white shadow-bottom">
+				<div class="container">
+					<ul class="nav nav-light nav-tabs" role="tablist">
+						<li class="nav-item">
+							<a href="#" class="d-flex h-60p align-items-center nav-link active">Feed</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="d-flex h-60p align-items-center nav-link">Projects</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="d-flex h-60p align-items-center nav-link">Groups</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="d-flex h-60p align-items-center nav-link">Photos</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="tab-content mt-sm-60 mt-30">
+				<div class="tab-pane fade show active" role="tabpanel">
+					<div class="container">
+						<div class="hk-row">
+							<div class="col-lg-8">
+								<div class="card card-profile-feed">
+									<div class="card-header card-header-action">
+										<div class="media align-items-center">
+											<div class="media-img-wrap d-flex mr-10">
+												<div class="avatar avatar-sm">
+													<img src="dist/img/avatar2.jpg" alt="user"
+														class="avatar-img rounded-circle">
+												</div>
+											</div>
+											<div class="media-body">
+												<div class="text-capitalize font-weight-500 text-dark">Madelyn Rascon
+												</div>
+												<div class="font-13">25 min</div>
+											</div>
+										</div>
+										<div class="d-flex align-items-center card-action-wrap">
+											<div class="inline-block dropdown">
+												<a class="dropdown-toggle no-caret" data-toggle="dropdown" href="#"
+													aria-expanded="false" role="button"><i
+														class="ion ion-ios-more"></i></a>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="#">Action</a>
+													<a class="dropdown-item" href="#">Another action</a>
+													<a class="dropdown-item" href="#">Something else here</a>
+													<div class="dropdown-divider"></div>
+													<a class="dropdown-item" href="#">Separated link</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-body">
+										<p class="card-text mb-30">There was that time artists at Sequence opted to
+											hand-Sharpie the lorem ipsum passage on a line of paper bags they designed
+											for Chipotle.</p>
+										<div class="card">
+											<div class="position-relative">
+												<img class="card-img-top d-block" src="dist/img/cropper.jpg"
+													alt="Card image cap">
+												<a href="#"
+													class="btn btn-dark btn-wth-icon icon-wthot-bg btn-rounded btn-pg-link"><span
+														class="icon-label"><i class="ion ion-md-link"></i></span><span
+														class="btn-text">website</span></a>
+											</div>
+											<div class="card-body">
+												<h5 class="card-title">Bacon chicken turducken spare ribs.</h5>
+												<p class="card-text">Of course, we'd be remiss not to include the
+													veritable cadre of lorem ipsum knock offs featuring: Bacon Ipsum,
+													Hipster Ipsum, Corporate Ipsum, Legal Ipsum.</p>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer justify-content-between">
+										<div>
+											<a href="#"><i class="ion ion-md-heart text-primary"></i>30K</a>
+										</div>
+										<div>
+											<a href="#">1K comments</a>
+											<a href="#">12 shares</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							{{#each user}}
+							<div class="col-lg-4">
+								<div class="card card-profile-feed">
+									<div class="card-header card-header-action">
+										<div class="media align-items-center">
+											<div class="media-img-wrap d-flex mr-10">
+												<div class="avatar avatar-sm">
+													<img src="/uploads/users/{{photo}}" alt="user"
+														class="avatar-img rounded-circle">
+												</div>
+											</div>
+											<div class="media-body">
+												<div class="text-capitalize font-weight-500 text-dark">{{firstname}}
+													{{lastname}}
+												</div>
+												<div class="font-13">{{role}}</div>
+											</div>
+										</div>
+										<div class="d-flex align-items-center card-action-wrap">
+											<div class="inline-block dropdown">
+												<a class="dropdown-toggle no-caret" data-toggle="dropdown" href="#"
+													aria-expanded="false" role="button"><i
+														class="ion ion-ios-settings"></i></a>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a href="" data-toggle="modal" data-target="#photo">Upload Photo</a>
+													{{!-- <a class="dropdown-item" href="#">Another action</a>
+													<a class="dropdown-item" href="#">Something else here</a> --}}
+													<div class="dropdown-divider"></div>
+													<a class="dropdown-item" href="#">Separated link</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row text-center">
+										<div class="col-4 border-right pr-0">
+											<div class="pa-15">
+												<span class="d-block display-6 text-dark mb-5">154</span>
+												<span class="d-block text-capitalize font-14">photos</span>
+											</div>
+										</div>
+										<div class="col-4 border-right px-0">
+											<div class="pa-15">
+												<span class="d-block display-6 text-dark mb-5">65</span>
+												<span class="d-block text-capitalize font-14">followers</span>
+											</div>
+										</div>
+										<div class="col-4 pl-0">
+											<div class="pa-15">
+												<span class="d-block display-6 text-dark mb-5">433</span>
+												<span class="d-block text-capitalize font-14">views</span>
+											</div>
+										</div>
+									</div>
+									<ul class="list-group list-group-flush">
+										{{!-- <li class="list-group-item"><span><i
+													class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Went
+													to:</span></span><span class="ml-5 text-dark">Oh, Canada</span></li> --}}
+										<li class="list-group-item"><span><i
+													class="ion ion-md-briefcase font-18 text-light-20 mr-10"></i><span>Email
+													:</span></span><span class="ml-5 text-dark">{{email}}</span>
+										</li>
+										<li class="list-group-item"><span><i
+													class="ion ion-md-home font-18 text-light-20 mr-10"></i><span>Phone
+													Number
+													:</span></span><span class="ml-5 text-dark">{{phone}}</span></li>
+										{{!-- <li class="list-group-item"><span><i
+													class="ion ion-md-pin font-18 text-light-20 mr-10"></i><span>From:</span></span><span
+												class="ml-5 text-dark">Settle, WA</span></li> --}}
+									</ul>
+								</div>
+							</div>
+							{{/each}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Row -->
+</div>
+<!-- /Container -->
+
+{{!-- Modal zone --}}
+<div class="modal fade" id="photo" tabindex="-1" role="dialog" aria-labelledby="photo" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="photo">Photo Upload</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="/user/profile?_csrf={{_csrfToken}}" method="POST" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="image">Image</label>
+						<input type="file" name="image" id="">
+					</div>
+					<div class="form-group">
+						<input type="hidden" name="_csrf" value="{{_csrfToken}}">
+						<button class="btn btn-round btn-success" type="submit">Upload</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
